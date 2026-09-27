@@ -1,25 +1,55 @@
-# Subscription SaaS Starter
+<div align="center">
 
-A billing-domain starter focused on the part that usually gets messy: keeping product access in sync with subscription events.
+<img src="https://capsule-render.vercel.app/api?type=waving&height=200&text=SUBSCRIPTION%20SAAS&fontAlignY=38&desc=PLANS%20%E2%80%A2%20USAGE%20%E2%80%A2%20BILLING%20STATE&descAlignY=58&color=0:050505,55:202020,100:5a1616&fontColor=f5f5f5&descColor=d4d4d4" width="100%" />
 
-This repo models free/pro/team entitlements, usage limits, checkout activation, upgrades/downgrades, failed payments, cancellation and event history. It is intentionally provider-neutral at the core so a Stripe webhook handler can translate Stripe events into these domain events instead of mixing payment-provider objects through the whole app.
+![Node](https://img.shields.io/badge/Node.js-20%2B-111111?style=for-the-badge&logo=nodedotjs)
+![Domain](https://img.shields.io/badge/domain-billing%20logic-2b2b2b?style=for-the-badge)
+![Tests](https://img.shields.io/badge/tests-node:test-7a1f1f?style=for-the-badge)
 
-## Includes
+**A billing-domain starter focused on keeping product access in sync with subscription events.**
 
-- plan entitlements
-- feature/usage gating
+</div>
+
+---
+
+## Core idea
+
+Payment providers should tell the app **what happened**. The app should decide **what that means for access**.
+
+That separation keeps webhook handling easier to test and stops payment-provider objects leaking across the entire product.
+
+## Included
+
+- free / pro / team entitlements
+- feature and usage gating
 - subscription lifecycle state machine
-- past-due handling
+- checkout activation
+- upgrades and downgrades
+- failed-payment / past-due handling
 - cancel-at-period-end state
-- event log
-- tests around the risky transitions
+- event history
+- tests around risky transitions
+
+```txt
+provider event
+    ↓
+normalized billing event
+    ↓
+subscription state
+    ↓
+product entitlements
+```
+
+## Test
 
 ```bash
 npm test
 ```
 
-## Design choice
+## Production boundary
 
-Payment providers should tell the app **what happened**. The app should decide **what that means for access**. Keeping those two concerns separate makes webhook handling easier to test and prevents billing logic from leaking everywhere.
+A production implementation would add durable storage, idempotency keys, signed webhook verification, customer mappings and real checkout/customer-portal endpoints.
 
-A production implementation would add durable storage, idempotency keys, signed webhook verification, customer mappings and the actual checkout/customer-portal endpoints.
+---
+
+<div align="center"><sub>YukiShinobi // billing state belongs in the domain, not scattered through UI checks.</sub></div>
