@@ -1,0 +1,9 @@
+{
+  "name": "subscription-saas-starter",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Subscription lifecycle and entitlement engine for a small SaaS product.",
+  "main": "src/index.js",
+  "scripts": { "test": "node --test", "demo": "node src/demo.js" },
+  "engines": { "node": ">=20" }
+}
