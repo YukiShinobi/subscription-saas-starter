@@ -53,3 +53,10 @@ A production implementation would add durable storage, idempotency keys, signed 
 ---
 
 <div align="center"><sub>YukiShinobi // billing state belongs in the domain, not scattered through UI checks.</sub></div>
+
+
+## Scope and maintenance — October 2026
+
+An isolated billing-domain model, not a configured live payments service. Do not imply Stripe checkout, subscriptions, or payment webhook delivery work without provider keys and end-to-end tests.
+
+These repositories document individual experiments or products. A README describes the codebase but is not a claim of independently verified production availability. For current flagship work see [Project Creation](https://github.com/YukiShinobi/project-creation), [Veyra](https://github.com/YukiShinobi/YukiShinobi-veyra), and [Simply Management](https://github.com/YukiShinobi/SIMPLYMANAGEMENT-WEBSITE).
